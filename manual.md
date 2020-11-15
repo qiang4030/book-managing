@@ -49,4 +49,4 @@ root
    
    
 3. **安装说明**
-   ![](./public/static/uploads/QR_code.jpg)
+   ![](./public/static/uploads/qrcode.jpg)
