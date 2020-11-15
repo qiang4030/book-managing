@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="__STATIC__/js/jquery-3.4.1.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		a,a:hover{text-decoration:none;}
+		ul,li{list-style:none;}
+		html::-webkit-scrollbar{display:none;}
+		html{scrollbar-width:none;}
+		html{-ms-overflow-style:none;}
+		img{width:100%;heiht:auto;}
+		.header{width:100%;height:77px;position:fixed;top:0;left:0;z-index:4;}
+		.d1{position:absolute;top:0;left:0;height:100%;width:100%;}
+		.d2{position:absolute;top:100%;left:0;width:100%;height:100px;background:#fff;}
+		.nav{width:auto;text-align:center;height:20px;position:absolute;top:29px;right:38px;font:12px/1.14 PingFang SC,Microsoft Yahei,Heiti SC,Helvetica;}
+		.nav span{display:inline-block;height:20px;line-height:20px;margin-left:35px;color:#fff;}
+		.nav span a{color:#fff;text-decoration:none;}
+		.login{width:424px;height:511px;background:rgba(255,255,255);margin:100px auto;border-radius:5px 0 0 5px;position:fixed;z-index:6;top:0;bottom:0;left:0;right:0;}
+		.b_close{position:absolute;top:-20px;right:-20px;background:rgba(0,0,0,0.9);color:#fff;border-radius:50%;display:block;width:40px;height:40px;text-align:center;line-height:40px;}
+		.mask{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:5;}
+		.title_login{text-align:center;background:rgba(40,72,95,1);color:#fff;border-radius:5px 0 0 0;height:80px;line-height:80px;font-size:20px;margin-bottom:60px;}
+		.input-group{width:262px;}
+		#username,#password{width:260px;height:44px;line-height:44px;border-radius:4px;outline:0;padding-left:8px;background:#fff;font-size:14px;10px;margin-left:80px;margin-top:10px;border:1px solid lightgray;}
+		#submit{width:270px;height:44px;margin-top:6px;margin-left:80px;border-radius:4px;background:rgba(59,120,221);color:#fff;font-size:16px;border:0;}
+		.forgotpwd a{color:red;display:inline-block;width:360px;text-align:right;margin:30px auto 6px;color:#3B78DD;}
+		.forgotpwd a:hover{color:#999;}
+		#submit:hover{background:rgba(37,96,215);}
+		.noscroll{height:100%;}
+		input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{-webkit-box-shadow: 0 0 0px 1000px white inset}
+	</style>
+</head>
+<body>
+<div class="mask"></div>
+<div class="container">
+	<div class="header">
+		<img src="__STATIC__/images/logo.png" style="width:139px;margin-top:16px;margin-left:30px;">
+		<div class="nav">
+			<span><a href="">功能介绍</a></span>
+			<span class="b_login"><a href="{:url('Index/index')}">登录</a></span>
+			<span class="b_register"><a href="{:url('User/signup')}">注册</a></span>
+		</div>
+	</div>
+	<div class="login">
+			<a class="b_close">X</a>
+			<form action="signupoload" method="post" id="frm" name="frm">
+				<div class="title_login">
+					<h2>用户注册</h2>
+				</div>
+				<div class="input-group">
+					<input type="text" id="username" name="username" placeholder="请输入用户名">
+				</div>
+				<div class="input-group">
+					<input type="password" id="password" name="password" placeholder="请输入密码">
+				</div>
+				<div class="forgotpwd">
+					<a href="">忘记密码？</a>
+				</div>
+				<div class="b_submit">
+					<input type="submit" id="submit" name="submit" value="注册" onclick="return check();">
+				</div>
+			</form>
+	</div>
+	<div class="d1">
+		<img src="__STATIC__/images/bg1.jpg" style="margin-top:-102.667px;opacity:1;" class="pic">
+	</div>
+<!-- 	<div class="d2">
+		<img src="__STATIC__/images/bg2.jpg">
+	</div> -->
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+	$(window).scroll(function() {
+        if ($(document).scrollTop()<=0){
+            $('.header').css('background','rgba(59,120,221,0)').css('transition','all .6s');
+        }
+        else{
+        	$('.header').css('background','rgba(59,120,221,1)').css('transition','all .6s');
+        }
+
+    // if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+    //     alert("滚动条已经到达底部！");
+    // }
+	});
+	// $('.b_login').click(function(){
+	// 	$('.login').fadeIn('slow');
+	// 	$('.mask').css('display','block');
+	// 	$('html,body').addClass('noscroll');
+	// });
+	$('.b_close').click(function(){
+		$('.login').css('display','none');
+		$('.mask').css('display','none');
+		$('html,body').removeClass('noscroll');
+	});
+	$('.b_close,.b_login,.b_register').hover().css('cursor','pointer');
+});
+	// alert('宽：'+$('.mask').width()+'高：'+$('.mask').height());
+	function check(){
+		if($('#username').val()=="" || $('#password').val()==""){
+			alert('用户名或密码不能为空！');
+			return false;
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分类图书</title>
+	<script type="text/javascript" src="__STATIC__/js/jquery-3.4.1.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;font-family:'Microsoft YaHei';}
+		html::-webkit-scrollbar{display:none;}
+		html{scrollbar-width:none;}
+		html{-ms-overflow-style:none;}
+		.container{width:96%;margin:30px; auto;}
+		.bottom{display:flex;}
+		.left{width:200px;margin:20px auto;}
+		.left ul li{width:200px;height:80px;line-height:80px;text-align:center;background:lightgray;list-style:none;margin-bottom:30px;}
+		.right{flex:1;padding-left:80px;padding-bottom:20px;display:flex;}
+		.d2{padding-left:10px;}
+		.col2 ul li{list-style:none;padding-left:10px;color:#111;line-height:1.6;}
+		.col2 ul li a{color:#072;text-decoration:none;}
+		.lable li a{text-decoration:none;display:block;width:100%;height:100%;}
+		.col1 img{width:60px;height:auto;max-height:90px;box-shadow:#ccc 3px 3px 3px;}
+		.col2{height:100px;}
+		.nr{text-align:center;color:red;}
+		.box2{height:100%;flex:1;margin-left:100px;padding:10px;padding-left:100px;}
+		.lable2 li{display:inline-block;background:#f5f5f5;width:50px;height:26px;line-height:26px;margin:3px;text-align:center;color:#37a;font-size:14px;cursor:pointer;}
+		.lable2 li a{text-decoration:none;color:#37a;}
+		.labletitle{display:block;margin-top:10px;}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="bottom">
+			<div class="left">
+				<ul class="lable">
+					<li><a href="{:url('srtBook',['lable'=>'小说'])}">小说</a></li>
+					<li><a href="{:url('srtBook',['lable'=>'社会'])}">社会</a></li>
+					<li><a href="{:url('srtBook',['lable'=>'生活'])}">生活</a></li>
+					<li><a href="{:url('srtBook',['lable'=>'学科'])}">学科</a></li>
+					<li><a href="{:url('srtBook',['lable'=>'阅读'])}">阅读</a></li>
+					<li><a href="{:url('srtBook',['lable'=>'诗集'])}">诗集</a></li>
+					<li><a href="{:url('srtBook',['lable'=>'传媒'])}">传媒</a></li>
+					<li><a href="{:url('srtBook',['lable'=>'其他'])}">其他</a></li>
+				</ul>
+			</div>
+			<div class="right">
+				<div class="box1">
+				{if count($rs)>0}
+				<table>
+					{foreach $rs as $k=>$v}
+					<tr>
+						{if $v['book_photo']!=null}
+						<td class="col1"><a href="{:url('viewBook',['bookid'=>$v['id']])}"><img src="__STATIC__/uploads/{$v['book_photo']}"></a></td>
+						{else/}
+						<td class="col1"><a href="{:url('viewBook',['bookid'=>$v['id']])}"><img src="__STATIC__/uploads/{$photo}"></a></td>
+						{/if}
+						<td class="col2">
+							<ul>
+								<li style="font-size:16px;margin:-8px auto 10px;"><a href="{:url('viewBook',['bookid'=>$v['id']])}">{$v['book_name']}</a></li>
+								<li style="color:#37a;font-size:12px;">{$v['book_type']}</li>
+								<li style="color:#999;font-size:12px;">{$v['author']}</li>
+								<li style="color:#999;font-size:12px;">{$v['book_press']}/{$v['add_date']}</li>
+							</ul>
+						</td>
+					</tr>
+					{/foreach}
+				</table>
+				{else/}
+					<div class="nr">暂无此类图书记录！</div>
+				{/if}
+				</div>
+				<div class="box2">
+					<h2 style="line-height:1.8em;">热门标签</h2><hr width="90%">
+					<ul class="lable2">
+						<span class="labletitle">文学</span>
+						<li><a href="{:url('srtBook',['lable'=>'小说'])}">小说</a></li>
+						<li>随笔</li>
+						<li>散文</li>
+						<li><a href="{:url('srtBook',['lable'=>'诗集'])}">诗集</a></li>
+						<li>童话</li>
+						<li><a href="{:url('srtBook',['lable'=>'名著'])}">名著</a></li>
+						<li>港台</li>
+						<li>更多>></li>
+						<span class="labletitle">流行</span>
+						<li>漫画</li>
+						<li>推理</li>
+						<li>绘本</li>
+						<li>青春</li>
+						<li><a href="{:url('srtBook',['lable'=>'科幻'])}">科幻</a></li>
+						<li>言情</li>
+						<li>奇幻</li>
+						<li>武侠</li>
+						<li>更多>></li>
+						<span class="labletitle">文化</span>
+						<li>历史</li>
+						<li>哲学</li>
+						<li>传记</li>
+						<li>设计</li>
+						<li>建筑</li>
+						<li>电影</li>
+						<li>回忆录</li>
+						<li>音乐</li>
+						<li>更多>></li>
+						<span class="labletitle">生活</span>
+						<li>旅行</li>
+						<li>励志</li>
+						<li>教育</li>
+						<li>职场</li>
+						<li>美食</li>
+						<li>健康</li>
+						<li>家居</li>
+						<li>更多>></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

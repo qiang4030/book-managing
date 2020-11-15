@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图书查询</title>
+	<script type="text/javascript" src="__STATIC__/js/jquery-3.4.1.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		.resultlayer{margin:0 auto;width:80%;}
+		.input_1{width:200px;height:24px;padding-left:5px;}
+		#submit,#reset,select{width:50px;height:28px;}
+		.frmlayer{padding-bottom:10px;text-align:center;margin:20px auto;}
+		.nr{text-align:center;color:red;}
+		.pagination{display:none;}
+		table{border-collapse:collapse;width: 920px;margin:0 auto;}
+		/*tr:hover{background: #dddddd;}*/
+		td{text-align: left;height: auto;padding: 5px;}
+		td a{text-decoration: none;color: #000000;}
+		td a:hover{color: blue;}
+		th{text-align: left;padding-left: 6px;background: #d0d0d0;}
+		/*.bt th{text-align:center;}*/
+		.pic{width:30px;height:auto;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="frmlayer">
+			<form id="frm" name="frm" action="{:url('qryBook')}" method="post">
+				<input type="text" name="book_str1" id="book_str1" class="input_1" placeholder="输入图书名" value="{$gjz1}">
+				<input type="text" name="book_str2" id="book_str2" class="input_1" placeholder="输入作者名" value="{$gjz2}">
+				<input type="submit" id="submit" name="submit" value="查询" onclick="return check();">
+				<input type="reset" id="reset" name="reset" value="清空" onclick="return clsinput();">
+			</form>
+		</div>
+		<div class="resultlayer">
+		{if count($rs)>0 && $submit!=null}
+		<table width="900" border="1" cellpadding="0" cellspacing="0" align="center">
+			<tr class="bt"><th>图书编号</th><th>图书名称</th><th>图书作者</th><th>图书类别</th><th colspan="3" style="text-align:center;">操作</th><th style="display:none;">批量删除</th></tr>
+			{foreach $rs as $k=>$v}
+			<tr>
+				<td>{$v['id']}</td>
+				<td><a href="https://www.baidu.com/s?ie=UTF-8&wd={$v['book_name']}" target="_blank">{$v['book_name']}</a></td>
+				<!-- <td>{$v['book_name']}</td> -->
+				<td>{$v['author']}</td>
+				<td>{$v['book_type']}</td>
+				<td><a href="{:url('viewBook',['bookid'=>$v['id']])}">more>></a></td>
+				<td><a href="{:url('mdfBook',['bookid'=>$v['id'],'booktype'=>$v['book_type']])}">修改</a></td>
+				<td><a href="{:url('delBook',['bookid'=>$v['id']])}" onclick="javascript:return delconfirm('{$v['book_name']}')">删除</a></td>
+				<td style="text-align:center;display:none;"><input type="checkbox"></td>
+			</tr>
+			{/foreach}
+			<tr style="display:none;"><td colspan="7"></td><td><input type="submit" name="submit" value="删除所选" class="del" onclick="javascript:return delconfirm('{$v['book_name']}')"></td></tr>
+		</table>
+		{$rs|raw}
+		{else/}
+		{/if}
+		</div>
+	</div>
+	<script type="text/javascript">
+		function check(){
+			var str1=$('#book_str1').val();
+			var str2=$('#book_str2').val();
+			if(str1=="" && str2==""){
+				alert('请输入图名或作者名！');
+				return false;
+			}
+		}
+		function clsinput(){
+			$('#book_str1').attr("value","");
+			$('#book_str2').attr("value","");
+			// $('#book_str2').val('');
+		}
+		function delconfirm(bookname){
+			if(!confirm('您确定要删除'+bookname+'吗？')){
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>

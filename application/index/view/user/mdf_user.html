@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户信息修改</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		.container{width:300px;margin:80px auto;height:300px;background:rgb(238,238,238,0.3);border-top-left-radius:12px;border-top-right-radius:12px;box-shadow:#ccc 6px 0 6px;}
+		span{display:inline-block;width:100px;text-align:right;}
+		h2{background:rgb(255,255,255);width:100%;text-align:center;height:50px;line-height:50px;display:block;border-top-left-radius:12px;border-top-right-radius:12px;color:#999;}
+		.inputgroup{margin:20px;}
+		.inputgroup input{border-radius:3px;border:none;width:150px;height:30px;padding-left:5px;}
+		#submit{background:rgb(59,120,221);margin-left:36px;width:225px;margin-top:20px;color:#fff;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h2>修改用户</h2>
+		<form action="{:url('mdfUserInput')}" id="frm" name="frm" method="post">
+			<div class="inputgroup">
+				<span>用户ID：</span>
+				<input type="text" name="userid" value="{$userid}" readonly="readonly">
+			</div>
+			<div class="inputgroup">
+				<span>新密码：</span>
+				<input type="password" name="pwd">
+			</div>
+			<div class="inputgroup">
+				<!-- <span></span> -->
+				<input type="submit" name="submit" id="submit" value="修改">
+			</div>
+		</form>
+	</div>
+</body>
+</html>

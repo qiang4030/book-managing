@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改图书</title>
+	<script type="text/javascript" src="__STATIC__/js/jquery-3.4.1.min.js"></script>
+	<style type="text/css">
+		.container{border:0px solid red;margin:0 auto;width:400px;text-align:center;padding:10px;}
+		table{border-collapse: collapse;width: 550px;margin: 20px auto;}
+		tr{border:1px solid #dddddd;}
+		th{text-align: right;padding-right:15px;display: inline-block;width: 150px;height: 35px;line-height: 48px;}
+		td{text-align: left;padding: 8px;border:1px solid #dddddd;width: 500px;height: auto;}
+		.book_id,input{width: 100%;height: 30px;font-size: 15px;padding-left: 5px;margin-left: -5px;border: none;}
+		.book_id{border:1px solid #dddddd;padding-left: 20px;}
+		.box{border:1px solid #000;margin: 50px auto;/*display: inline-block;*/}
+		.submit{text-align: center;}
+		.submit input{width: 150px;height: 35px;margin-left: 20px;font-size: 18px;cursor: pointer;}
+		select{height: 28px;}
+		textarea{resize:none;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>修改图书信息</h1>
+		<form method="post" action="{:url('mdfBookInput')}" enctype="multipart/form-data" onsubmit="return check();">
+	<table>
+		<tr>
+			<th>图书编号</th>
+			<td><input type="text" name="bookid" value="{$bookrs.id}" readonly="readonly"></td>
+		</tr>
+		<tr>
+			<th>图书名称</th>
+			<td><input type="text" name="bookname" value="{$bookrs.book_name}"></td>
+		</tr>
+		<tr>
+			<th>作者</th>
+			<td><input type="text" name="author" value="{$bookrs.author}"></td>
+		</tr>
+		<tr>
+			<th>出版社</th>
+			<td><input type="text" name="press" value="{$bookrs.book_press}"></td>
+		</tr>
+		<tr>
+			<th>类别</th>
+			<td><select name="booktype">
+				<optgroup label="广告">
+					<option value="广告传媒" {if $type=='广告传媒'} selected {/if}>广告传媒</option>
+				</optgroup>
+				<optgroup label="社会">
+					<option value="社会批判" {if $type=='社会批判'} selected {/if}>社会批判</option>
+					<option value="社会思想" {if $type=='社会思想'} selected {/if}>社会思想</option>
+				</optgroup>
+				<optgroup label="生活">
+					<option value="回忆录" {if $type=='回忆录'} selected {/if}>回忆录</option>
+				</optgroup>
+				<optgroup label="诗集">
+					<option value="诗集" {if $type=='诗集'} selected {/if}>诗集</option>
+				</optgroup>
+				<optgroup label="小说">
+					<option value="小说-爱情" {if $type=='小说-爱情'} selected {/if}>小说-爱情</option>
+					<option value="小说-剧情" {if $type=='小说-剧情'} selected {/if}>小说-剧情</option>
+					<option value="小说-科幻" {if $type=='小说-科幻'} selected {/if}>小说-科幻</option>
+					<option value="小说-历史" {if $type=='小说-历史'} selected {/if}>小说-历史</option>
+					<option value="小说-散文" {if $type=='小说-散文'} selected {/if}>小说-散文</option>
+					<option value="小说-图像" {if $type=='小说-图像'} selected {/if}>小说-图像</option>
+					<option value="社会批判" {if $type=='社会批判'} selected {/if}>小说-外文</option>
+					<option value="小说-文学" {if $type=='小说-文学'} selected {/if}>小说-文学</option>
+					<option value="小说-武侠" {if $type=='小说-武侠'} selected {/if}>小说-武侠</option>
+				</optgroup>
+				<optgroup label="学科">
+					<option value="学科-经济学" {if $type=='学科-经济学'} selected {/if}>学科-经济学</option>
+					<option value="学科-历史" {if $type=='学科-历史'} selected {/if}>学科-历史</option>
+					<option value="学科-历史&政治" {if $type=='学科/历史&政治'} selected {/if}>学科-历史&政治</option>
+					<option value="学科-数学" {if $type=='学科-数学'} selected {/if}>学科-数学</option>
+					<option value="学科-数学" {if $type=='学科-数学'} selected {/if}>学科-数学</option>
+					<option value="学科-心理学" {if $type=='学科-心理学'} selected {/if}>学科-心理学</option>
+					<option value="学科-学科综合" {if $type=='学科-学科综合'} selected {/if}>学科/学科综合</option>
+					<option value="学科-哲学" {if $type=='学科-哲学'} selected {/if}>学科-哲学</option>
+				</optgroup>
+				<optgroup label="阅读">
+					<option value="阅读指南" {if $type=='阅读指南'} selected {/if}>阅读指南</option>
+				</optgroup>
+				<optgroup label="其他">
+					<option value="其他" {if $type=='其他'} selected {/if}>其他</option>
+				</optgroup>
+			</select></td>
+		</tr>
+		<tr>
+			<th>入库时间</th>
+			<td><input type="date" name="adddate" value="{$bookrs.add_date}"></td>
+		</tr>
+		<tr>
+			<th>简介</th>
+			<td><textarea name="bookbrief" cols="50" rows="8">{$bookrs.book_brief}</textarea></td>
+		</tr>
+		<tr>
+			<th>图片</th>
+			<td><input type="file" name="photo" id="photo" accept=".png,.jpg,.gif,.jpeg"></td>
+		</tr>
+		<tr>
+			<td colspan='2' class='submit'>
+				<input type='submit' name='modify' value='确认修改' onclick="return check();">
+				<input type='reset' name='reset' value='重置'>
+			</td>
+		</tr>
+	</table>
+	</form>
+	</div>
+	<script type="text/javascript">
+		function check(){
+			if(!$('#photo').val()){
+				alert('请上传图片！');
+				$('#photo').focus();
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>

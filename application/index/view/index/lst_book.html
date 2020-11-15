@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图书列表</title>
+	<script type="text/javascript" src="__STATIC__/js/jquery-3.4.1.min.js"></script>
+	<style type="text/css">
+		table{border-collapse:collapse;width: 920px;margin:0 auto;}
+		/*tr:hover{background: #dddddd;}*/
+		td{text-align: left;height: auto;padding: 5px;}
+		td a{text-decoration: none;color: #000000;}
+		td a:hover{color: blue;}
+		th{text-align: left;padding-left: 6px;background: #d0d0d0;}
+		.pagination,.pager{text-align: center;margin:10px auto;width:600px;}
+		.pagination li,.pager li{list-style:none;border:1px solid #333;display:inline-block;width:30px;text-align:center;height:20px;margin:2px;border-radius:2px;}
+		.pagination li a,.pager li a{display:block;width:30px;line-height:20px;}
+		.pagination li a{text-decoration:none;}
+		.pagination li a:hover,.pager li a:hover{background:rgba(59,120,221,1);color:#fff;}
+		.del{width:;background:rgb(230,86,76);border-radius:5px;color:#fff;cursor:pointer;border:none;outline:none;}
+		.del:hover{box-shadow:#ccc 0px 3px 3px;outline:none;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		{if count($rs)>0}
+		<table width="900" border="1" cellpadding="0" cellspacing="0" align="center">
+			<tr><th>图书编号</th><th>图书名称</th><th>图书作者</th><th>图书类别</th><th colspan="3" style="text-align:center;">操作</th><th style="display:none;">批量删除</th></tr>
+			{foreach $rs as $k=>$v}
+			<tr>
+				<td>{$v['id']}</td>
+				<td><a href="https://www.baidu.com/s?ie=UTF-8&wd={$v['book_name']}" target="_blank">{$v['book_name']}</a></td>
+				<!-- <td>{$v['book_name']}</td> -->
+				<td>{$v['author']}</td>
+				<td>{$v['book_type']}</td>
+				<td><a href="{:url('viewBook',['bookid'=>$v['id']])}">more>></a></td>
+				<td><a href="{:url('mdfBook',['bookid'=>$v['id'],'booktype'=>$v['book_type']])}">修改</a></td>
+				<td><a href="{:url('delBook',['bookid'=>$v['id']])}" onclick="javascript:return delconfirm('{$v['book_name']}')">删除</a></td>
+				<td style="text-align:center;display:none;"><input type="checkbox" name="data[]"></td>
+			</tr>
+			{/foreach}
+			<tr style="display:none;"><td colspan="7"></td><td><input type="submit" name="submit" value="删除所选" class="del" onclick="javascript:return delconfirm('{$v['book_name']}')"></td></tr>
+		</table>
+		{$rs|raw}
+		{else/}
+		{/if}
+	</div>
+	<script type="text/javascript">
+		function delconfirm(bookname){
+			if(!confirm('您确定要删除'+bookname+'吗？')){
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>

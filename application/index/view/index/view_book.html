@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图书详细信息</title>
+	<style type="text/css">
+		.container{width:90%;margin:0 auto;min-width:600px;}
+		.bottom{display:flex;}
+		.d1{margin-top:60px;}
+		.d1 img{max-width:300px;height:auto;box-shadow:#ccc 6px 6px 6px;}
+		.d2{flex:1;margin-top:50px;}
+		.d2 span{color:#666;}
+		ul li{list-style:none;line-height:24px;}
+		.tb{line-height:24px;margin-top:10px;}
+		.brief{text-indent:2em;}
+		a{text-decoration:none;}
+		.tb{color:#072;}
+		.comment{margin-top:30px;color:#072;}
+	</style>
+</head>
+<body>
+<!-- 	{foreach $details as $k=>$v}
+	{$v['id']}
+	{$v['book_name']}
+	{$v['book_press']}
+	<img src="__STATIC__/uploads/{$v['book_photo']}">
+	{/foreach} -->
+	<div class="container">
+		{foreach $details as $k=>$v}
+		<div class="bottom">
+			<div class="d1">
+				<img src="__STATIC__/uploads/{$photo}">
+			</div>
+			<div class="d2">
+				<ul>
+					<li><h2>{$v['book_name']}</h2></li>
+					<li><span>作者：</span><a href="https://www.baidu.com/s?ie=UTF-8&wd={$v['author']}" target="_blank">{$v['author']}</a></li>
+					<li><span>出版社：</span>{$v['book_press']}</li>
+					<li><span>图书类型：</span>{$v['book_type']}</li>
+					<li><span>入库时间：</span>{$v['add_date']}</li>
+					<li><div class="tb">图书简介……</div><div class="brief">{$v['book_brief']}</div></li>
+					<li class="comment">
+						评论……
+					</li>
+				</ul>
+			</div>
+		</div>
+		{/foreach}
+	</div>
+</body>
+</html>
