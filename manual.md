@@ -34,14 +34,14 @@ root
 
 
 
-![](./public/static/login.png)
+   ![](./public/static/login.png)
 
 
 
-![](./public/static/book_add.png)
+   ![](./public/static/book_add.png)
 
-![](./public/static/book_query.png)
+   ![](./public/static/book_query.png)
 
-![](./public/static/book_sort.png)
+   ![](./public/static/book_sort.png)
 
-![](./public/static/user_info.png)
+   ![](./public/static/user_info.png)
