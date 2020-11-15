@@ -49,4 +49,5 @@ root
    
    
 3. **安装说明**
+
    ![](./public/static/uploads/qrcode.jpg)
