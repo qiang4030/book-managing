@@ -45,9 +45,3 @@ root
    ![](./public/static/book_sort.png)
 
    ![](./public/static/user_info.png)
-   
-   
-   
-3. **安装说明**
-
-   ![](./public/static/uploads/qrcode.jpg)
